@@ -11,8 +11,10 @@
 `docker compose up -d --build --remove-orphans`
 5. Після підняття перейти по адресі http://localhost:9999 (або своєму) і перевірити чи працює система.
 6. Якщо отримуємо "Internal Server Error" - тоді:
+
 6.1 виконуємо команду:
 `docker compose run --rm odoo_1 odoo -c /etc/odoo/odoo.conf -d odoo -i base --stop-after-init`
 або `docker compose run --rm odoo_1 odoo -d odoo -i base --stop-after-init` якщо отримали помилку.
+
 6.2 запускаємо ще раз сервер командою п. 4.
 7. Оновляємо сторінку і потраплаяємо на сторінку логіну в системі. Стандартний логін/пароль: admin/admin
