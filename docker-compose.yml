@@ -1,0 +1,32 @@
+
+services:
+  db_1:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: odoo
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+    volumes:
+      - ./db:/var/lib/postgresql/data
+
+  odoo_1:
+    image: kcb-odoo_meest:latest
+    build: .
+    depends_on:
+      - db_1
+    ports:
+      - "8585:8069"
+      - "5556:5555"
+    volumes:
+      - ./addons:/mnt/extra-addons
+      - ./odoo.conf:/etc/odoo/odoo.conf
+      - ./data:/var/lib/odoo
+    environment:
+      - HOST=db_1
+      - USER=odoo
+      - PASSWORD=odoo
+    command: >
+      odoo -c /etc/odoo/odoo.conf -i base
+#        python3 -m odoo -d odoo --modules=transit_wh_kcb_base --language=uk_UA --i18n-export=/mnt/extra-addons/transit_wh_kcb_base/i18n/uk.po
+#        python3 -m debugpy --listen 0.0.0.0:5678 --wait-for-client --log-to-stderr /usr/bin/odoo -c /etc/odoo/odoo.conf -d odoo -i base
+      
