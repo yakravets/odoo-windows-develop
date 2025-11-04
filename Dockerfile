@@ -1,4 +1,4 @@
-FROM odoo:18
+FROM odoo:19
 
 USER root
 RUN pip install debugpy --no-cache-dir --break-system-packages
