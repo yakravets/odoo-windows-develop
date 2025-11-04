@@ -10,7 +10,7 @@ services:
       - ./db:/var/lib/postgresql/data
 
   odoo_1:
-    image: odoo_1_18:latest
+    image: odoo_1_19:latest
     build: .
     depends_on:
       - db_1
